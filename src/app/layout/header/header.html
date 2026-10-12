@@ -1,0 +1,20 @@
+<div class="wrap">
+  <div class="title-row">
+    <h1>Kệ dự phòng</h1>
+    <p class="scope">{{ settings().people | qty }} người, {{ settings().days | qty }} ngày</p>
+  </div>
+  <div class="overall">
+    <div class="meter" aria-hidden="true"><i [style.width.%]="percent()"></i></div>
+    <p>{{ enough() }} trên {{ total() }} món đang đủ mức tối thiểu</p>
+  </div>
+</div>
+<nav class="tabs wrap" aria-label="Các mục">
+  @for (tab of tabs(); track tab.path) {
+    <a [routerLink]="tab.path" routerLinkActive="active" ariaCurrentWhenActive="page">
+      {{ tab.label }}
+      @if (tab.count) {
+        <span class="count">{{ tab.count }}</span>
+      }
+    </a>
+  }
+</nav>

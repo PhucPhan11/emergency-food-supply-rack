@@ -1,0 +1,51 @@
+<dialog #dialog>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h2>{{ target() ? 'Sửa món' : 'Thêm món' }}</h2>
+    <label>
+      Tên món
+      <input formControlName="name" type="text" maxlength="60" />
+    </label>
+    <div class="cols">
+      <label>
+        Nhóm
+        <input formControlName="category" type="text" list="categoryList" maxlength="30" />
+      </label>
+      <label>
+        Đơn vị
+        <input formControlName="unit" type="text" maxlength="12" placeholder="kg, gói, hộp" />
+      </label>
+    </div>
+    <datalist id="categoryList">
+      @for (category of categories(); track category) {
+        <option [value]="category"></option>
+      }
+    </datalist>
+    <div class="cols">
+      <label>
+        Định mức mỗi người mỗi ngày
+        <input formControlName="rate" type="number" min="0" step="any" inputmode="decimal" />
+      </label>
+      <label>
+        Mỗi lần lấy ra
+        <input formControlName="step" type="number" min="0.001" step="any" inputmode="decimal" />
+      </label>
+    </div>
+    <label>
+      Mức tối thiểu cố định
+      <input formControlName="minOverride" type="number" min="0" step="any" inputmode="decimal" />
+      <small>Bỏ trống để tự tính: định mức × số người × số ngày.</small>
+    </label>
+    <label>
+      Ghi chú
+      <input formControlName="note" type="text" maxlength="80" />
+    </label>
+    <menu>
+      @if (target()) {
+        <button type="button" class="btn danger" (click)="remove()">Xoá món</button>
+      }
+      <span class="spacer"></span>
+      <button type="button" class="btn" (click)="close()">Huỷ</button>
+      <button type="submit" class="btn primary" [disabled]="form.invalid">Lưu</button>
+    </menu>
+  </form>
+</dialog>

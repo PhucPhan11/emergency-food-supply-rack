@@ -1,0 +1,65 @@
+<section class="group">
+  <h2>Quy mô kệ</h2>
+  <div class="panel">
+    <label>
+      Số người ăn
+      <input
+        #people
+        type="number"
+        min="1"
+        step="1"
+        inputmode="numeric"
+        [value]="settings().people"
+        (change)="update('people', people)"
+      />
+    </label>
+    <label>
+      Số ngày cần đủ ăn
+      <input
+        #days
+        type="number"
+        min="1"
+        step="1"
+        inputmode="numeric"
+        [value]="settings().days"
+        (change)="update('days', days)"
+      />
+    </label>
+    <label>
+      Báo trước khi hết hạn (ngày)
+      <input
+        #warnDays
+        type="number"
+        min="0"
+        step="1"
+        inputmode="numeric"
+        [value]="settings().warnDays"
+        (change)="update('warnDays', warnDays)"
+      />
+    </label>
+    <small>
+      Đổi số người hoặc số ngày thì mức tối thiểu của các món tự tính lại, trừ món đã đặt mức cố
+      định.
+    </small>
+  </div>
+</section>
+
+<section class="group">
+  <h2>Dữ liệu</h2>
+  <div class="panel">
+    <small>
+      Dữ liệu chỉ nằm trong trình duyệt của máy này. Sao lưu ra tệp để chuyển sang máy khác hoặc
+      phòng khi xoá dữ liệu trình duyệt.
+    </small>
+    <button type="button" class="btn" (click)="exportBackup()">Sao lưu ra tệp</button>
+    <button type="button" class="btn" (click)="importFile.click()">Khôi phục từ tệp</button>
+    <button type="button" class="btn danger" (click)="reset()">Đặt lại về danh mục mẫu</button>
+    <input
+      #importFile
+      type="file"
+      accept="application/json,.json"
+      hidden
+      (change)="importBackup(importFile)"
+    />
+  </div>
+</section>

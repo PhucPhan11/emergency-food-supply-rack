@@ -1,0 +1,21 @@
+@if (list().length) {
+  <p class="lead">Mua bù những món này để kệ về lại mức tối thiểu.</p>
+  <ul class="list">
+    @for (entry of list(); track entry.item.id) {
+      <li>
+        <span class="grow">
+          <b>{{ entry.item.name }}</b>
+          <span class="sub">{{ entry.need | qty }} {{ entry.item.unit }}</span>
+        </span>
+        <button type="button" class="btn primary" (click)="lotDialog.open(entry.item)">
+          Đã mua
+        </button>
+      </li>
+    }
+  </ul>
+  <button type="button" class="btn wide" (click)="copy()">Sao chép danh sách</button>
+} @else {
+  <p class="empty">Kệ đang đủ mức tối thiểu, chưa cần mua gì.</p>
+}
+
+<app-lot-dialog #lotDialog />

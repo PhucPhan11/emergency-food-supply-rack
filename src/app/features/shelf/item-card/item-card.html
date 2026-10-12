@@ -1,0 +1,68 @@
+@let v = view();
+@let unit = item().unit;
+
+<article class="item" [class]="v.level">
+  <button type="button" class="item-head" title="Sửa món" (click)="editItem.emit()">
+    <span class="name">{{ item().name }}</span>
+    @if (item().note) {
+      <span class="note">{{ item().note }}</span>
+    }
+  </button>
+
+  <div class="meter" aria-hidden="true"><i [style.width.%]="v.percent"></i></div>
+
+  <div class="item-row">
+    <p class="qty">
+      <b>{{ v.stock | qty }}</b> / {{ v.min | qty }} {{ unit }}
+      @if (v.coverDays !== null) {
+        <span class="cover">đủ khoảng {{ v.coverDays | qty }} ngày</span>
+      }
+    </p>
+    <div class="actions">
+      <button
+        type="button"
+        class="btn"
+        [disabled]="v.stock <= 0"
+        [attr.aria-label]="'Lấy ra ' + (v.takeQty | qty) + ' ' + unit"
+        (click)="takeOut()"
+      >
+        − {{ v.takeQty | qty }}
+      </button>
+      <button type="button" class="btn primary" (click)="addLot.emit()">+ Nhập</button>
+    </div>
+  </div>
+
+  @if (v.missing > 0 || v.lots.length) {
+    <div class="item-foot">
+      @if (v.missing > 0) {
+        <span class="badge" [class]="v.level">Thiếu {{ v.missing | qty }} {{ unit }}</span>
+      }
+      @if (v.expired) {
+        <span class="badge short">{{ v.expired }} lô quá hạn</span>
+      }
+      @if (v.expiring) {
+        <span class="badge low">{{ v.expiring }} lô sắp hết hạn</span>
+      }
+      <span class="spacer"></span>
+      @if (v.lots.length) {
+        <button type="button" class="link" [attr.aria-expanded]="lotsOpen()" (click)="toggleLots()">
+          {{ v.lots.length }} lô {{ lotsOpen() ? '▴' : '▾' }}
+        </button>
+      }
+    </div>
+  }
+
+  @if (lotsOpen() && v.lots.length) {
+    <ul class="lots">
+      @for (row of v.lots; track row.lot.id) {
+        <li>
+          <span>
+            <b>{{ row.lot.qty | qty }} {{ unit }}</b>
+            <span [class]="row.level"> {{ row.when }}</span>
+          </span>
+          <button type="button" class="link" (click)="removeLot(row.lot.id)">Bỏ lô</button>
+        </li>
+      }
+    </ul>
+  }
+</article>

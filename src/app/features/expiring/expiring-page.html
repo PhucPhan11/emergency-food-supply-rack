@@ -1,0 +1,23 @@
+@if (due().length) {
+  <p class="lead">Đem những lô này ra nấu trước, rồi mua lô mới thế vào.</p>
+  <ul class="list">
+    @for (entry of due(); track entry.item.id + '/' + entry.lot.id) {
+      <li>
+        <span class="grow">
+          <b>{{ entry.item.name }}</b>
+          <span class="sub">
+            {{ entry.lot.qty | qty }} {{ entry.item.unit }}, HSD {{ entry.lot.exp | viDate }}
+          </span>
+        </span>
+        <span class="badge" [class]="entry.days < 0 ? 'short' : 'low'">
+          {{ entry.days | dueLabel }}
+        </span>
+        <button type="button" class="btn" (click)="remove(entry)">
+          {{ entry.days < 0 ? 'Bỏ đi' : 'Đã ăn hết' }}
+        </button>
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="empty">Không có lô nào hết hạn trong {{ settings().warnDays }} ngày tới.</p>
+}

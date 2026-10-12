@@ -1,0 +1,16 @@
+@for (group of groups(); track group.category) {
+  <section class="group">
+    <h2>{{ group.category }}</h2>
+    @for (item of group.items; track item.id) {
+      <app-item-card
+        [item]="item"
+        (addLot)="lotDialog.open(item)"
+        (editItem)="itemDialog.open(item)"
+      />
+    }
+  </section>
+}
+<button type="button" class="btn wide" (click)="itemDialog.open(null)">+ Thêm món</button>
+
+<app-lot-dialog #lotDialog />
+<app-item-dialog #itemDialog />

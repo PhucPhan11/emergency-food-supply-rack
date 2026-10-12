@@ -1,0 +1,10 @@
+<div role="status">
+  @if (message(); as toast) {
+    <div class="toast">
+      <span>{{ toast.text }}</span>
+      @if (toast.canUndo) {
+        <button type="button" class="link" (click)="undo()">Hoàn tác</button>
+      }
+    </div>
+  }
+</div>

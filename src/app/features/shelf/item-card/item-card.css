@@ -1,0 +1,106 @@
+:host {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.item {
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.item.ok .meter i {
+  background: var(--ok);
+}
+
+.item.low .meter i {
+  background: var(--low);
+}
+
+.item.short .meter i {
+  background: var(--short);
+}
+
+.item-head {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.item-head:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.name {
+  font-weight: 650;
+}
+
+.note {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.qty b {
+  font-size: 1.15rem;
+}
+
+.cover {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.item-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.lots {
+  margin-top: 10px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.lots li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.lots .low {
+  color: var(--low);
+}
+
+.lots .short {
+  color: var(--short);
+}

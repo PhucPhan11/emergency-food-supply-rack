@@ -1,0 +1,76 @@
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: block;
+  padding-top: 14px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+h1 {
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.scope {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.overall {
+  margin-top: 10px;
+}
+
+.overall p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.tabs a {
+  flex: 1 0 auto;
+  padding: 10px 8px;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tabs a.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.tabs a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.count {
+  display: inline-block;
+  min-width: 1.5em;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--low-bg);
+  color: var(--low);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}

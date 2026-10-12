@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Kệ dự phòng</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="title-row">
+        <h1>Kệ dự phòng</h1>
+        <p id="scope" class="scope"></p>
+      </div>
+      <div class="overall">
+        <div class="meter" aria-hidden="true"><i id="overallBar"></i></div>
+        <p id="overallText"></p>
+      </div>
+    </div>
+    <nav id="tabs" class="tabs wrap" aria-label="Các mục"></nav>
+  </header>
+
+  <main id="view" class="wrap"></main>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span id="toastText"></span>
+    <button type="button" class="link" data-act="undo">Hoàn tác</button>
+  </div>
+
+  <dialog id="lotDialog">
+    <form method="dialog">
+      <h2></h2>
+      <label>Số lượng (<span data-unit></span>)
+        <input name="qty" type="number" min="0.001" step="any" inputmode="decimal" required>
+      </label>
+      <label>Hạn sử dụng
+        <input name="exp" type="date">
+        <small>Bỏ trống nếu bao bì không ghi hạn.</small>
+      </label>
+      <menu>
+        <button value="ok" class="btn primary">Nhập kệ</button>
+        <button value="cancel" class="btn" formnovalidate>Huỷ</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="itemDialog">
+    <form method="dialog">
+      <h2></h2>
+      <label>Tên món
+        <input name="name" type="text" required maxlength="60">
+      </label>
+      <div class="cols">
+        <label>Nhóm
+          <input name="category" type="text" list="categoryList" maxlength="30">
+        </label>
+        <label>Đơn vị
+          <input name="unit" type="text" maxlength="12" placeholder="kg, gói, hộp">
+        </label>
+      </div>
+      <datalist id="categoryList"></datalist>
+      <div class="cols">
+        <label>Định mức mỗi người mỗi ngày
+          <input name="rate" type="number" min="0" step="any" inputmode="decimal">
+        </label>
+        <label>Mỗi lần lấy ra
+          <input name="step" type="number" min="0.001" step="any" inputmode="decimal">
+        </label>
+      </div>
+      <label>Mức tối thiểu cố định
+        <input name="minOverride" type="number" min="0" step="any" inputmode="decimal">
+        <small>Bỏ trống để tự tính: định mức × số người × số ngày.</small>
+      </label>
+      <label>Ghi chú
+        <input name="note" type="text" maxlength="80">
+      </label>
+      <menu>
+        <button value="ok" class="btn primary">Lưu</button>
+        <button value="cancel" class="btn" formnovalidate>Huỷ</button>
+        <span class="spacer"></span>
+        <button value="delete" class="btn danger" formnovalidate data-delete>Xoá món</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <input id="importFile" type="file" accept="application/json,.json" hidden>
+
+  <script src="core.js"></script>
+  <script src="seed.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
